@@ -441,22 +441,41 @@ function App() {
     copyName.sort((a, b) => a.name.localeCompare(b.name));
     setContacts(copyName);
    }
-    
+   function sortByPopularity () {
+    const copyPop = [...contacts];
+    copyPop.sort((a, b) => a.popularity - b.popularity);
+    setContacts(copyPop);
+   }
 
+  function deleteActor(id) {
+  
+    console.log(id)
+      const filteredA = [...contacts]
+      
+      filteredA.filter((el) => {
+        return el.id !== id;
+      });
+
+    
+   
+ /*   setContacts(filteredA);*/
+  }
  
   return (
 
     <div className="App">
       <button onClick={makeRandomContact}>Add Random Contact</button>
       <button onClick={sortByName}>Sort by name</button>
+      <button onClick={sortByPopularity}>Sort by popularity</button>
 
       <h1>LAB | React IronContacts</h1>
       
         <table >
            <thead>
            <tr>
-            <th>Name</th>
+            
             <th>Picture</th>
+            <th>Name</th>
             <th>Populatiry</th>
             <th>Won an Oscar</th>
             <th>Won an Emmy</th>
@@ -466,11 +485,13 @@ function App() {
         {contacts.map((contact) => {
             return (
         <tr className="stroki" key={contact.id}>
-            <th className="colonki">  <p  style={{color: "red"}}> {contact.name } </p> </th>
+  
           <th className="colonki" >  <img src={contact.pictureUrl} alt=""  style={{width: '5rem'}}/></th>
+          <th className="colonki">  <p  style={{color: "red"}}> {contact.name } </p> </th>
           <th className="colonki"> <p>{contact.popularity}</p> </th>
           <th className="colonki">  {contact.wonOscar && <p> 🏆 </p>} </th>
           <th className="colonki"> {contact.wonEmmy && <p> 🏆 </p>}  </th>
+          <th className="colonki"> <button onClick={deleteActor(contact.id)}> Delete </button>  </th>
           </tr>
     );
   })}
