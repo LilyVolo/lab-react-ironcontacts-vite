@@ -450,15 +450,13 @@ function App() {
   function deleteActor(id) {
   
     console.log(id)
-      const filteredA = [...contacts]
-      
-      filteredA.filter((el) => {
+      const filteredA = contacts.filter((el) => {
         return el.id !== id;
       });
 
     
    
- /*   setContacts(filteredA);*/
+  setContacts(filteredA);
   }
  
   return (
@@ -491,7 +489,7 @@ function App() {
           <th className="colonki"> <p>{contact.popularity}</p> </th>
           <th className="colonki">  {contact.wonOscar && <p> 🏆 </p>} </th>
           <th className="colonki"> {contact.wonEmmy && <p> 🏆 </p>}  </th>
-          <th className="colonki"> <button onClick={deleteActor(contact.id)}> Delete </button>  </th>
+          <th className="colonki"> <button onClick={() => deleteActor(contact.id)}> Delete </button>  </th>
           </tr>
     );
   })}
